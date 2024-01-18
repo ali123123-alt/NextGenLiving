@@ -26,28 +26,28 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          // gradient: LinearGradient(
-          //   colors: [Color(0xFF001F3F), Color(0xFF003366)],
-          //   begin: Alignment.topLeft,
-          //   end: Alignment.bottomRight,
-          // ),
-          color: Color(0x00018aa3)
+          gradient: LinearGradient(
+            colors: [Color(0xFF001F3F), Color(0xFF003366)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
         ),
         child: const Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CircleAvatar(
-                backgroundImage: AssetImage(
-                  'assets/images/logo.jpeg',
-                ),
-                radius: 100, //Text
+                radius: 100.0,
+                backgroundImage: AssetImage('assets/images/logo.jpeg'), // Replace with your actual image path
               ),
               SizedBox(height: 20.0),
               Text(
-                "NextGen Living.",
-                style: kHeadline,
-                textAlign: TextAlign.center,
+                'Home Automation',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),

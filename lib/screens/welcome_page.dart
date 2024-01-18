@@ -35,72 +35,90 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: Column(
-            children: [
-              Flexible(
-                child: Column(
-                  children: [
-                    const Center(
-                      child: CircleAvatar(
-                        backgroundImage: AssetImage(
-                          'assets/images/logo.jpeg',
-                        ),
-                        radius: 100, //Text
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Text(
-                      "NextGen Living.",
-                      style: kHeadline,
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.8,
-                    )
-                  ],
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF001F3F), Color(0xFF003366)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Color(0xFF001F3F), Color(0xFF003366)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
               ),
-              Container(
-                height: 60,
-                decoration: BoxDecoration(
-                  color: Colors.grey[850],
-                  borderRadius: BorderRadius.circular(18),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: MyTextButton(
-                        bgColor: Colors.white,
-                        buttonName: 'Register',
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => RegisterPage()));
-                        },
-                        textColor: Colors.black87,
-                      ),
+              child: Column(
+                children: [
+                  Flexible(
+                    child: Column(
+                      children: [
+                        const Center(
+                          child: CircleAvatar(
+                            backgroundImage: AssetImage(
+                              'assets/images/logo.jpeg',
+                            ),
+                            radius: 100, //Text
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const Text(
+                          "NextGen Living.",
+                          style: kHeadline,
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.8,
+                        )
+                      ],
                     ),
-                    Expanded(
-                      child: MyTextButton(
-                        bgColor: Colors.transparent,
-                        buttonName: 'Sign In',
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => SignInPage()));
-                        },
-                        textColor: Colors.white,
-                      ),
+                  ),
+                  Container(
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[850],
+                      borderRadius: BorderRadius.circular(18),
                     ),
-                  ],
-                ),
-              )
-            ],
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: MyTextButton(
+                            bgColor: Colors.white,
+                            buttonName: 'Register',
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => RegisterPage()));
+                            },
+                            textColor: Colors.black87,
+                          ),
+                        ),
+                        Expanded(
+                          child: MyTextButton(
+                            bgColor: Colors.transparent,
+                            buttonName: 'Sign In',
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => SignInPage()));
+                            },
+                            textColor: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
         ),
       ),
