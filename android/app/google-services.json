@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "187215184427",
+    "project_id": "nextgenliving-d9667",
+    "storage_bucket": "nextgenliving-d9667.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:187215184427:android:ce748809ad037da728a06e",
+        "android_client_info": {
+          "package_name": "com.example.nextgen_living"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLaJ68OL6YcAKZSl0Y8bdOS-Ab9nxAng4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
