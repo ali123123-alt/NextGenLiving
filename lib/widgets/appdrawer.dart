@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:nextgenliving/screens/signin_page.dart';
+import 'package:nextgenliving/screens/signinscreen.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -74,7 +74,7 @@ class AppDrawer extends StatelessWidget {
               await FirebaseAuth.instance.signOut();
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => SignInPage(),
+                  builder: (context) => SignInScreen(),
                 ),
               );
             },

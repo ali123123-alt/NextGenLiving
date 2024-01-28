@@ -1,8 +1,9 @@
 import "package:audioplayers/audioplayers.dart";
 import "package:flutter/material.dart";
-import "package:nextgenliving/screens/homepage.dart";
-
+import "package:google_fonts/google_fonts.dart";
+import "package:nextgenliving/screens/temperaturescreen.dart";
 import "../widgets/appdrawer.dart";
+import "../widgets/dashboardcard.dart";
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -39,13 +40,24 @@ class DashboardScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Welcome To User!!',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Welcome Home,",
+                      style: TextStyle(fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,),
+                    ),
+                    Text(
+                      'Mitch Koko',
+                      style: GoogleFonts.bebasNeue(fontSize: 30,color: Colors.white),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(height: 16),
@@ -98,7 +110,7 @@ class DashboardScreen extends StatelessWidget {
                         Navigator.of(context).push(
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    const HomePage()));
+                                    const TemperatureScreen()));
                       },
                     ),
                   ],
@@ -106,46 +118,6 @@ class DashboardScreen extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class DashboardCard extends StatelessWidget {
-  final String title;
-  final IconData icon;
-  final VoidCallback onTap;
-
-  const DashboardCard({
-    required this.title,
-    required this.icon,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Card(
-        elevation: 4,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              size: 48,
-              color: Colors.blue,
-            ),
-            SizedBox(height: 8),
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
         ),
       ),
     );

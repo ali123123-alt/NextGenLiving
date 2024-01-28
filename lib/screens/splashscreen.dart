@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:nextgenliving/screens/welcome_page.dart';
-
-import '../constants/constants.dart';
+import 'package:nextgenliving/constants/constants.dart';
+import 'package:nextgenliving/screens/welcomescreen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         const Duration(seconds: 5),
         () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => WelcomePage())));
+            .push(MaterialPageRoute(builder: (context) => WelcomeScreen())));
   }
 
   @override
@@ -26,28 +25,18 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF001F3F), Color(0xFF003366)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+          gradient: gradient
         ),
         child: const Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CircleAvatar(
-                radius: 100.0,
-                backgroundImage: AssetImage('assets/images/logo.jpeg'), // Replace with your actual image path
-              ),
+              logo,
               SizedBox(height: 20.0),
               Text(
-                'Home Automation',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
-                ),
+                "NextGen Living.",
+                style: kHeadline,
+                textAlign: TextAlign.center,
               ),
             ],
           ),
