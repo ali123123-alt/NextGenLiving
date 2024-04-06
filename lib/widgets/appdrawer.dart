@@ -1,9 +1,45 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:nextgenliving/screens/signinscreen.dart';
 
-class AppDrawer extends StatelessWidget {
+import '../screens/signinscreen.dart';
+
+class AppDrawer extends StatefulWidget {
   const AppDrawer({super.key});
+
+  @override
+  State<AppDrawer> createState() => _AppDrawerState();
+}
+
+class _AppDrawerState extends State<AppDrawer> {
+  User? user;
+  Map<String, dynamic>? userData;
+  String email = "";
+  String name = "";
+
+  @override
+  void initState() {
+    super.initState();
+    user = FirebaseAuth.instance.currentUser;
+    fetchUserDetails(user!.uid);
+  }
+
+  Future<void> fetchUserDetails(String uid) async {
+    final userRef = FirebaseFirestore.instance.collection('user').doc(uid);
+    final userSnapshot = await userRef.get();
+    if (userSnapshot.exists) {
+      setState(() {
+        userData = userSnapshot.data();
+        email = userData?['email'];
+        name = userData?['name'];
+      });
+      print(userData);
+      print(email);
+      print(name);
+    } else {
+      print('User document does not exist');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,17 +47,17 @@ class AppDrawer extends StatelessWidget {
       child: ListView(
         padding: const EdgeInsets.all(0),
         children: [
-          const DrawerHeader(
+          DrawerHeader(
             decoration: BoxDecoration(
               color: Colors.black,
             ), //BoxDecoration
             child: UserAccountsDrawerHeader(
               decoration: BoxDecoration(color: Colors.black),
               accountName: Text(
-                "Abhishek Mishra",
+                name,
                 style: TextStyle(fontSize: 18),
               ),
-              accountEmail: Text("abhishekm977@gmail.com"),
+              accountEmail: Text(email),
               currentAccountPictureSize: Size.square(50),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Color.fromARGB(255, 165, 255, 137),

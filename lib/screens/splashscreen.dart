@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:nextgenliving/constants/constants.dart';
-import 'package:nextgenliving/screens/welcomescreen.dart';
+import 'package:nextgen_living1/screens/welcomescreen.dart';
+import '../constants/constants.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -24,20 +24,14 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: gradient
-        ),
+        decoration: const BoxDecoration(gradient: gradient),
         child: const Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               logo,
               SizedBox(height: 20.0),
-              Text(
-                "NextGen Living.",
-                style: kHeadline,
-                textAlign: TextAlign.center,
-              ),
+              projecttitle,
             ],
           ),
         ),

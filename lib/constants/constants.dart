@@ -25,31 +25,38 @@ const kButtonText = TextStyle(
 const kBodyText2 =
     TextStyle(fontSize: 28, fontWeight: FontWeight.w500, color: Colors.white);
 
-const gradient=LinearGradient(
+const gradient = LinearGradient(
   colors: [Color(0xFF001F3F), Color(0xFF003366)],
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
 );
 
-const gradient1=LinearGradient(
+const gradient1 = LinearGradient(
   colors: [Color(0xFF1a1a2e), Color(0xFF16213e)],
   begin: Alignment.centerLeft,
   end: Alignment.centerRight,
 );
 
-const gradient2=LinearGradient(
+const gradient2 = LinearGradient(
   colors: [Color(0xFF1a1a2e), Color(0xFF16213e)],
   begin: Alignment.centerLeft,
   end: Alignment.centerRight,
 );
 
-const logo=CircleAvatar(
+const logo = CircleAvatar(
   radius: 100.0,
-  backgroundImage: AssetImage('assets/images/welcome_logo.PNG'), // Replace with your actual image path
+  backgroundImage: AssetImage(
+      'assets/images/home_logo.PNG'), // Replace with your actual image path
 );
 
-const backarrow=Image(
+const backarrow = Image(
   width: 24,
   color: Colors.white,
   image: Svg('assets/images/back_arrow.svg'),
+);
+
+const projecttitle = Text(
+  "NextGen Living.",
+  style: kHeadline,
+  textAlign: TextAlign.center,
 );

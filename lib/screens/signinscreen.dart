@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nextgenliving/screens/dashboardscreen.dart';
-import 'package:nextgenliving/screens/signupscreen.dart';
+import 'package:nextgen_living1/screens/signupscreen.dart';
 import '../auth_service.dart';
 import '../constants/constants.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
+import '../utils/utils.dart';
 import '../widgets/inputfield.dart';
+import 'dashboardscreen.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -27,9 +27,10 @@ class _SignInScreenState extends State<SignInScreen> {
       final result = _authService.signIn(_email, _password);
       if (result != null) {
         Navigator.of(context).push(
-            MaterialPageRoute(
-                builder: (context) =>
-                const DashboardScreen()));
+            MaterialPageRoute(builder: (context) => const DashboardScreen()));
+      } else {
+        Utils().toastMessage('Incorrect Email or Password');
+        return;
       }
     }
   }
@@ -99,7 +100,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                       return null;
                                     },
                                     onChanged: (value) {
-                                      _email=value;
+                                      _email = value;
                                       // Handle change
                                     },
                                   ),
@@ -117,7 +118,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                     },
                                     obscureText: false,
                                     onChanged: (value) {
-                                      _password=value;
+                                      _password = value;
                                       // Handle change
                                     },
                                   ),
@@ -138,8 +139,14 @@ class _SignInScreenState extends State<SignInScreen> {
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
                                           colors: isLoginButtonClicked
-                                              ? [const Color(0xFF16213e), const Color(0xFF1a1a2e)]
-                                              : [const Color(0xFF1a1a2e), const Color(0xFF16213e)],
+                                              ? [
+                                                  const Color(0xFF16213e),
+                                                  const Color(0xFF1a1a2e)
+                                                ]
+                                              : [
+                                                  const Color(0xFF1a1a2e),
+                                                  const Color(0xFF16213e)
+                                                ],
                                           begin: Alignment.centerLeft,
                                           end: Alignment.centerRight,
                                         ),
@@ -151,13 +158,14 @@ class _SignInScreenState extends State<SignInScreen> {
                                         borderRadius: BorderRadius.circular(55),
                                         boxShadow: isLoginButtonClicked
                                             ? [
-                                          BoxShadow(
-                                            color: Colors.blue.withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: const Offset(0, 3),
-                                          ),
-                                        ]
+                                                BoxShadow(
+                                                  color: Colors.blue
+                                                      .withOpacity(0.5),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                  offset: const Offset(0, 3),
+                                                ),
+                                              ]
                                             : [],
                                       ),
                                       child: const Padding(
@@ -184,7 +192,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                           Navigator.push(
                                             context,
                                             CupertinoPageRoute(
-                                              builder: (context) => SignUpScreen(),
+                                              builder: (context) =>
+                                                  SignUpScreen(),
                                             ),
                                           );
                                         },
@@ -202,7 +211,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                           child: Text(
                                             'Register',
                                             style: kBodyText.copyWith(
-                                              color: isRegisterButtonHovered ? Colors.limeAccent : Colors.red,
+                                              color: isRegisterButtonHovered
+                                                  ? Colors.limeAccent
+                                                  : Colors.red,
                                             ),
                                           ),
                                         ),

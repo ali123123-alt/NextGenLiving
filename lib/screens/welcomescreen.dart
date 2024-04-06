@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:nextgenliving/screens/dashboardscreen.dart';
-import 'package:nextgenliving/screens/signinscreen.dart';
-import 'package:nextgenliving/screens/signupscreen.dart';
+import 'package:nextgen_living1/screens/signinscreen.dart';
+import 'package:nextgen_living1/screens/signupscreen.dart';
 import '../constants/constants.dart';
+import 'dashboardscreen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -27,13 +27,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: gradient
-        ),
+        decoration: const BoxDecoration(gradient: gradient),
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -42,17 +41,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 Flexible(
                   child: Column(
                     children: [
-                      const Center(
-                        child: logo
-                      ),
+                      const Center(child: logo),
                       const SizedBox(
                         height: 20,
                       ),
-                      const Text(
-                        "NextGen Living.",
-                        style: kHeadline,
-                        textAlign: TextAlign.center,
-                      ),
+                      projecttitle,
                       const SizedBox(
                         height: 10,
                       ),
@@ -68,9 +61,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Expanded(
-                        child: GestureDetector(
+                        child: CustomButton(
+                          text: 'Register',
                           onTap: () {
-                            // Add your Sign In button action
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -78,24 +71,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               ),
                             );
                           },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                gradient: gradient,
-                                borderRadius: BorderRadius.circular(18)
-                              ),
-                              child: const Center(child: Text("Register",style: TextStyle(
-                                  color: Colors.white,fontSize: 18),)),
-                            ),
-                          ),
                         ),
                       ),
-                      const SizedBox(width: 20), // Add horizontal margin between buttons
+                      const SizedBox(
+                          width: 20), // Add horizontal margin between buttons
                       Expanded(
-                        child: GestureDetector(
+                        child: CustomButton(
+                          text: 'SignIn',
                           onTap: () {
-                            // Add your Sign In button action
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -103,23 +86,43 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               ),
                             );
                           },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  gradient: gradient,
-                                  borderRadius: BorderRadius.circular(18)
-                              ),
-                              child: const Center(child: Text("SignIn",style: TextStyle(
-                                  color: Colors.white,fontSize: 18),)),
-                            ),
-                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
               ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CustomButton extends StatelessWidget {
+  final String text;
+  final VoidCallback onTap;
+
+  const CustomButton({required this.text, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: gradient,
+              borderRadius: BorderRadius.circular(18),
+            ),
+            child: Center(
+              child: Text(
+                text,
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
             ),
           ),
         ),
