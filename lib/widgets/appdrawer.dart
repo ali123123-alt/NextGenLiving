@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:nextgen_living1/screens/Rooms/AddRoom.dart';
+import 'package:nextgen_living1/screens/Rooms/Rooms.dart';
 import '../screens/signinscreen.dart';
+import '../screens/profilescreen.dart';
 
 class AppDrawer extends StatefulWidget {
   const AppDrawer({super.key});
@@ -48,18 +50,18 @@ class _AppDrawerState extends State<AppDrawer> {
         padding: const EdgeInsets.all(0),
         children: [
           DrawerHeader(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.black,
             ), //BoxDecoration
             child: UserAccountsDrawerHeader(
-              decoration: BoxDecoration(color: Colors.black),
+              decoration: const BoxDecoration(color: Colors.black),
               accountName: Text(
                 name,
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
               accountEmail: Text(email),
-              currentAccountPictureSize: Size.square(50),
-              currentAccountPicture: CircleAvatar(
+              currentAccountPictureSize: const Size.square(50),
+              currentAccountPicture: const CircleAvatar(
                 backgroundColor: Color.fromARGB(255, 165, 255, 137),
                 child: Text(
                   "A",
@@ -72,14 +74,16 @@ class _AppDrawerState extends State<AppDrawer> {
             leading: const Icon(Icons.person),
             title: const Text(' My Profile '),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => ProfileScreen()));
             },
           ),
           ListTile(
             leading: const Icon(Icons.book),
-            title: const Text(' My Course '),
+            title: const Text(' Rooms '),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const RoomScreen()));
             },
           ),
           ListTile(

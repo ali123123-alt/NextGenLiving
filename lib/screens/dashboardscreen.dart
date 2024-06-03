@@ -1,13 +1,8 @@
 import "package:audioplayers/audioplayers.dart";
-import "package:cloud_firestore/cloud_firestore.dart";
-import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
-import "package:flutter/widgets.dart";
-import "package:google_fonts/google_fonts.dart";
 import "package:nextgen_living1/screens/GasLeakageScreen.dart";
 import "package:nextgen_living1/screens/WaterLevelScreen.dart";
-// import "package:nextgen_living1/screens/homepage.dart";
 import "package:nextgen_living1/screens/temperaturescreen.dart";
 import "package:nextgen_living1/widgets/appbar.dart";
 import "../widgets/appdrawer.dart";
@@ -22,53 +17,6 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  User? user;
-  Map<String, dynamic>? userData;
-  String email = "";
-  String name = "";
-
-  @override
-  void initState() {
-    super.initState();
-    user = FirebaseAuth.instance.currentUser;
-    fetchUserDetails(user!.uid);
-  }
-
-  Future<void> fetchUserDetails(String uid) async {
-    final userRef = FirebaseFirestore.instance.collection('user').doc(uid);
-    final userSnapshot = await userRef.get();
-    if (userSnapshot.exists) {
-      setState(() {
-        userData = userSnapshot.data();
-        email = userData?['email'];
-        name = userData?['name'];
-      });
-      print(userData);
-      print(email);
-      print(name);
-    } else {
-      print('User document does not exist');
-    }
-  }
-
-  final List<String> roomTitles = [
-    'Living Room',
-    'Bedroom',
-    'Kitchen',
-    'Bathroom',
-    'Office',
-    // Add more room titles as needed
-  ];
-
-  final List<String> roomImagePaths = [
-    'assets/images/Living-Room-Wallpapers-02.jpg',
-    'assets/images/Living-Room-Wallpapers-02.jpg',
-    'assets/images/Living-Room-Wallpapers-02.jpg',
-    'assets/images/Living-Room-Wallpapers-02.jpg',
-    'assets/images/Living-Room-Wallpapers-02.jpg',
-    // Add more room image paths as needed
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,6 +25,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       backgroundColor: const Color(0x00018aa3),
       body: SingleChildScrollView(
         child: Container(
+          height: MediaQuery.of(context).size.height,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [Color(0xFF001F3F), Color(0xFF003366)],
@@ -89,23 +38,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         "Welcome Home,",
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
-                      ),
-                      Text(
-                        name,
-                        style: GoogleFonts.bebasNeue(
-                            fontSize: 30, color: Colors.white),
                       ),
                     ],
                   ),

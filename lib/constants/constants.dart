@@ -60,3 +60,21 @@ const projecttitle = Text(
   style: kHeadline,
   textAlign: TextAlign.center,
 );
+
+final List<String> roomTitles = [
+  'Living Room',
+  'Bedroom',
+  'Kitchen',
+  'Bathroom',
+  'Office',
+  // Add more room titles as needed
+];
+
+final List<String> roomImagePaths = [
+  'assets/images/Living-Room-Wallpapers-02.jpg',
+  'assets/images/Living-Room-Wallpapers-02.jpg',
+  'assets/images/Living-Room-Wallpapers-02.jpg',
+  'assets/images/Living-Room-Wallpapers-02.jpg',
+  'assets/images/Living-Room-Wallpapers-02.jpg',
+  // Add more room image paths as needed
+];

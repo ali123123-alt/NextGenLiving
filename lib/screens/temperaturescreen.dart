@@ -11,9 +11,11 @@ class TemperatureScreen extends StatefulWidget {
 }
 
 class _TemperatureScreenState extends State<TemperatureScreen> {
-  final ref = FirebaseDatabase.instance.ref('Temp');
-  double temperature = 0;
-  double humidity = 0;
+  DatabaseReference humidityref =
+      FirebaseDatabase.instance.ref('Temp/humidity');
+  DatabaseReference tempref = FirebaseDatabase.instance.ref('Temp/temp');
+  Object temperature = 0;
+  Object humidity = 0;
   final List<double> temperatureData = [20, 22, 21, 23, 24, 25, 26];
   final List<String> dates = [
     '2022-03-20',
@@ -28,20 +30,22 @@ class _TemperatureScreenState extends State<TemperatureScreen> {
   @override
   void initState() {
     super.initState();
-    ref.onValue.listen((DatabaseEvent event) {
+    humidityref.onValue.listen((DatabaseEvent event) {
       final data = event.snapshot.value;
-      print(data);
-      if (data != null && data is Map<String, dynamic>) {
-        final humi = data['humidity']; // Access humidity directly from data
-        final temp = data['temp']; // Access temperature directly from data
-        if (humi != null && temp != null) {
-          setState(() {
-            temperature = temp;
-            humidity = humi;
-          });
-          print('Humidity: $humi');
-          print('Temperature: $temp');
-        }
+      print('Data received: $data');
+      if (data != null) {
+        setState(() {
+          humidity = data;
+        });
+      }
+    });
+    tempref.onValue.listen((DatabaseEvent event) {
+      final data = event.snapshot.value;
+      print('Data received: $data');
+      if (data != null) {
+        setState(() {
+          temperature = data;
+        });
       }
     });
   }
@@ -49,7 +53,7 @@ class _TemperatureScreenState extends State<TemperatureScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarComp(),
+      appBar: const AppBarComp(),
       backgroundColor: Colors.transparent,
       body: Container(
         decoration: BoxDecoration(

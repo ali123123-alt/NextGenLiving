@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:nextgen_living1/screens/signupscreen.dart';
 import '../auth_service.dart';
 import '../constants/constants.dart';
-
 import '../utils/utils.dart';
 import '../widgets/inputfield.dart';
 import 'dashboardscreen.dart';
@@ -14,7 +13,7 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  bool isPasswordVisible = true;
+  // bool isPasswordVisible = true;
   final AuthService _authService = AuthService();
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   String _email = "";

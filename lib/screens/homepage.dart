@@ -9,21 +9,43 @@ class OffButtonScreen extends StatefulWidget {
 }
 
 class _OffButtonScreenState extends State<OffButtonScreen> {
-  late DatabaseReference _lightRef;
-  bool? lightStatus1;
-  bool? lightStatus2;
+  DatabaseReference light1ref = FirebaseDatabase.instance.ref('Light/light1');
+  DatabaseReference light2ref = FirebaseDatabase.instance.ref('Light/light2');
+  DatabaseReference fanref = FirebaseDatabase.instance.ref('Light/fan');
+  final _lightRef = FirebaseDatabase.instance.ref('Light');
+  bool? lightStatus1 = false;
+  bool? lightStatus2 = false;
+  bool? fanStatus = false;
 
   @override
   void initState() {
     super.initState();
-    _lightRef = FirebaseDatabase.instance.reference().child('Light');
-    _lightRef.onValue.listen((event) {
-      setState(() {
-        lightStatus1 =
-            (event.snapshot.value as Map<String, dynamic>?)?['light1'] as bool?;
-        lightStatus2 =
-            (event.snapshot.value as Map<String, dynamic>?)?['light2'] as bool?;
-      });
+    light1ref.onValue.listen((DatabaseEvent event) {
+      final data = event.snapshot.value;
+      print('Data received: $data');
+      if (data != null) {
+        setState(() {
+          lightStatus1 = data as bool?;
+        });
+      }
+    });
+    light2ref.onValue.listen((DatabaseEvent event) {
+      final data = event.snapshot.value;
+      print('Data received: $data');
+      if (data != null) {
+        setState(() {
+          lightStatus2 = data as bool?;
+        });
+      }
+    });
+    fanref.onValue.listen((DatabaseEvent event) {
+      final data = event.snapshot.value;
+      print('Data received: $data');
+      if (data != null) {
+        setState(() {
+          fanStatus = data as bool?;
+        });
+      }
     });
   }
 
@@ -163,6 +185,69 @@ class _OffButtonScreenState extends State<OffButtonScreen> {
                                           },
                                           child: Text(
                                               lightStatus2! ? 'ON' : 'OFF'),
+                                        ),
+                                      ),
+                                      // smart device name + switch
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    fanStatus == null
+                        ? const CircularProgressIndicator()
+                        : SizedBox(
+                            width: MediaQuery.of(context).size.width / 2,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(24),
+                                  color: fanStatus!
+                                      ? Colors.grey[900]
+                                      : const Color.fromARGB(44, 164, 167, 189),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 10.0),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      // icon
+                                      Image.asset(
+                                        "assets/images/fan.png",
+                                        height: 40,
+                                        color: fanStatus!
+                                            ? Colors.white
+                                            : Colors.grey.shade700,
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10.0),
+                                        child: Text(
+                                          "Smart Fan",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20,
+                                            color: fanStatus!
+                                                ? Colors.white
+                                                : Colors.black,
+                                          ),
+                                        ),
+                                      ),
+                                      Center(
+                                        child: ElevatedButton(
+                                          onPressed: () {
+                                            _lightRef.update(
+                                                {'fan': !(fanStatus ?? false)});
+                                          },
+                                          child:
+                                              Text(fanStatus! ? 'ON' : 'OFF'),
                                         ),
                                       ),
                                       // smart device name + switch

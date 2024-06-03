@@ -17,7 +17,7 @@ class _GasLeakageScreenState extends State<GasLeakageScreen>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
     )..repeat(reverse: true);
     _animation = Tween<double>(begin: 1.0, end: 0.0).animate(_controller);
   }
@@ -32,7 +32,7 @@ class _GasLeakageScreenState extends State<GasLeakageScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Gas Leakage Screen'),
+        title: const Text('Gas Leakage Screen'),
       ),
       body: Center(
         child: Stack(
@@ -41,7 +41,7 @@ class _GasLeakageScreenState extends State<GasLeakageScreen>
             Container(
               width: 200,
               height: 200,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.green,
               ),
@@ -51,7 +51,7 @@ class _GasLeakageScreenState extends State<GasLeakageScreen>
               child: Container(
                 width: 200,
                 height: 200,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.yellow,
                 ),
@@ -62,7 +62,7 @@ class _GasLeakageScreenState extends State<GasLeakageScreen>
               child: Container(
                 width: 150,
                 height: 150,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.orange,
                 ),
@@ -73,7 +73,7 @@ class _GasLeakageScreenState extends State<GasLeakageScreen>
               child: Container(
                 width: 100,
                 height: 100,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.red,
                 ),

@@ -10,7 +10,8 @@ class WaterLevelScreen extends StatefulWidget {
 }
 
 class _WaterLevelScreenState extends State<WaterLevelScreen> {
-  final ref = FirebaseDatabase.instance.ref('WaterLevel');
+  DatabaseReference ref =
+      FirebaseDatabase.instance.ref('WaterLevel/WaterLevel');
   double waterlevel = 0;
 
   @override
@@ -18,22 +19,18 @@ class _WaterLevelScreenState extends State<WaterLevelScreen> {
     super.initState();
     ref.onValue.listen((DatabaseEvent event) {
       final data = event.snapshot.value;
-      print(data);
-      if (data != null && data is Map<String, dynamic>) {
-        final water = data['WaterLevel'];
-        if (water != null) {
-          setState(() {
-            waterlevel = water;
-          });
-          print('Water Level: $water');
-        }
+      print('Data received: $data');
+      if (data != null) {
+        setState(() {
+          waterlevel = (data as double?)!;
+        });
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    double percentage = waterlevel / 1000 * 100;
+    double percentage = waterlevel / 3500 * 100;
     print(percentage);
     return Scaffold(
       appBar: const AppBarComp(),
